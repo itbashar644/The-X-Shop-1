@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест SQLite в браузере - The X Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+        .product h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .category {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+        .error {
+            color: #e74c3c;
+            background: #fdf2f2;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+        .success {
+            color: #27ae60;
+            background: #f0f9f0;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #27ae60;
+        }
+        .debug {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тест SQLite интеграции в браузере</h1>
+        
+        <div id="status" class="loading">Загрузка данных...</div>
+        
+        <div id="debug" class="debug" style="display: none;">
+            <strong>Отладочная информация:</strong>
+            <div id="debug-content"></div>
+        </div>
+        
+        <div id="stats" class="stats" style="display: none;"></div>
+        
+        <div id="products"></div>
+        <div id="categories"></div>
+    </div>
+
+    <script type="module">
+        // Импортируем SQLite базу данных
+        import { sqliteDB } from './src/data/sqlite/database.ts';
+        
+        // Функция для отображения отладочной информации
+        function showDebugInfo(info) {
+            const debugEl = document.getElementById('debug');
+            const debugContent = document.getElementById('debug-content');
+            debugContent.innerHTML = info;
+            debugEl.style.display = 'block';
+        }
+        
+        // Функция для отображения статистики
+        function showStats(products, categories) {
+            const statsEl = document.getElementById('stats');
+            
+            const categoryStats = {};
+            products.forEach(p => {
+                categoryStats[p.category] = (categoryStats[p.category] || 0) + 1;
+            });
+            
+            const priceRanges = {
+                'До 5000₽': products.filter(p => p.price < 5000).length,
+                '5000-15000₽': products.filter(p => p.price >= 5000 && p.price < 15000).length,
+                '15000₽+': products.filter(p => p.price >= 15000).length
+            };
+            
+            const ratingStats = {
+                '4.7+': products.filter(p => p.rating >= 4.7).length,
+                '4.5-4.6': products.filter(p => p.rating >= 4.5 && p.rating < 4.7).length,
+                '4.3-4.4': products.filter(p => p.rating >= 4.3 && p.rating < 4.5).length
+            };
+            
+            statsEl.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${products.length}</div>
+                    <div class="stat-label">Всего товаров</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${categories.length}</div>
+                    <div class="stat-label">Категорий</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${products.filter(p => p.isNew).length}</div>
+                    <div class="stat-label">Новых товаров</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${products.filter(p => p.isBestseller).length}</div>
+                    <div class="stat-label">Хитов продаж</div>
+                </div>
+            `;
+            statsEl.style.display = 'grid';
+        }
+        
+        async function testSQLite() {
+            const statusEl = document.getElementById('status');
+            const productsEl = document.getElementById('products');
+            const categoriesEl = document.getElementById('categories');
+            
+            let debugInfo = '';
+            
+            try {
+                // Инициализация базы данных
+                statusEl.textContent = 'Инициализация базы данных...';
+                debugInfo += '🚀 Инициализация SQLite...\n';
+                
+                await sqliteDB.init();
+                debugInfo += '✅ База данных инициализирована\n';
+                
+                // Получение продуктов
+                statusEl.textContent = 'Загрузка продуктов...';
+                debugInfo += '📦 Загрузка продуктов...\n';
+                
+                const products = await sqliteDB.getProducts();
+                debugInfo += `✅ Загружено ${products.length} продуктов\n`;
+                
+                // Получение категорий
+                statusEl.textContent = 'Загрузка категорий...';
+                debugInfo += '📂 Загрузка категорий...\n';
+                
+                const categories = await sqliteDB.getCategory();
+                debugInfo += `✅ Загружено ${categories.length} категорий\n`;
+                
+                // Отображение результатов
+                statusEl.innerHTML = `<div class="success">✅ Данные загружены успешно!</div>`;
+                
+                // Показываем статистику
+                showStats(products, categories);
+                
+                // Отображаем отладочную информацию
+                showDebugInfo(debugInfo);
+                
+                // Отображение продуктов
+                productsEl.innerHTML = '<h2>📦 Продукты</h2>';
+                productsEl.innerHTML += '<div class="grid">';
+                products.forEach(product => {
+                    productsEl.innerHTML += `
+                        <div class="product">
+                            <h3>${product.title}</h3>
+                            <p>${product.description}</p>
+                            <div class="price">${product.price} ₽</div>
+                            <span class="category">${product.category}</span>
+                            <p><strong>Рейтинг:</strong> ${product.rating}/5</p>
+                            <p><strong>В наличии:</strong> ${product.stockQuantity} шт.</p>
+                            <p><strong>ID:</strong> ${product.id}</p>
+                            ${product.isNew ? '<span class="category" style="background: #e74c3c;">Новинка</span>' : ''}
+                            ${product.isBestseller ? '<span class="category" style="background: #f39c12;">Хит</span>' : ''}
+                        </div>
+                    `;
+                });
+                productsEl.innerHTML += '</div>';
+                
+                // Отображение категорий
+                categoriesEl.innerHTML = '<h2>📂 Категории</h2>';
+                categoriesEl.innerHTML += '<div class="grid">';
+                categories.forEach(category => {
+                    categoriesEl.innerHTML += `
+                        <div class="product">
+                            <h3>${category.name}</h3>
+                            <p>${category.description || 'Описание отсутствует'}</p>
+                            <p><strong>ID:</strong> ${category.id}</p>
+                        </div>
+                    `;
+                });
+                categoriesEl.innerHTML += '</div>';
+                
+            } catch (error) {
+                console.error('Ошибка тестирования:', error);
+                statusEl.innerHTML = `<div class="error">
+                    ❌ Ошибка: ${error.message}<br>
+                    Проверьте консоль для подробностей
+                </div>`;
+                showDebugInfo(debugInfo + `❌ Ошибка: ${error.message}\n`);
+            }
+        }
+        
+        // Запускаем тест
+        testSQLite();
+    </script>
+</body>
+</html> 

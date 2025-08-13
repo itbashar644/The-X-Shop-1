@@ -1,0 +1,11 @@
+# Генерируем маппинг ID -> img_1.jpg, img_2.jpg и т.д. (в Linux/macOS)
+psql -U postgres -d thexshop -c "
+  COPY (
+    SELECT 
+      id, 
+      'img_' || ROW_NUMBER() OVER (ORDER BY id) || 
+      CASE WHEN random() > 0.5 THEN '.jpg' ELSE '.png' END AS image_name
+    FROM products
+    WHERE image_url = '/placeholder.svg'
+  ) TO '/tmp/mapping.csv' WITH CSV HEADER;
+"

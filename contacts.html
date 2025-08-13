@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контакты | The X Shop</title>
+    <meta name="description" content="Связаться с The X Shop. Свяжитесь с нами по любым вопросам о товарах из Китая для вашего дома." />
+    <meta name="keywords" content="контакты, обратная связь, the x shop, товары из китая, интернет-магазин" />
+    
+    <!-- CSS стили -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      /* Улучшенные стили для формы обратной связи */
+      .contact-section {
+        background-color: #f9f9f9;
+        padding: 60px 0;
+        margin-top: 20px;
+      }
+      
+      .contact-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+        padding: 40px 30px;
+      }
+      
+      
+      .contact-form-container {
+        padding: 40px 30px;
+      }
+      
+      .contact-form-container h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      
+      .contact-form .form-group {
+        margin-bottom: 20px;
+      }
+      
+      .contact-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555;
+        font-size: 0.9rem;
+      }
+      
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e1e1e1;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+      
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+        outline: none;
+      }
+      
+      .contact-form button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        font-size: 1rem;
+      }
+      
+      .contact-form button:hover {
+        background-color: #0069d9;
+      }
+      
+      @media (max-width: 768px) {
+        .contact-container {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+<header class="main-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">The X Shop</a>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Главная</a></li>
+          <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+          <li><a href="about.html" class="nav-link">О нас</a></li>
+          <li><a href="contacts.html" class="nav-link active">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="catalog.html?focus=search" class="action-icon search-icon" title="Поиск">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </a>
+        <a href="wishlist.html" class="action-icon wishlist-icon" title="Избранное">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+        </a>
+        <a href="cart.html" class="action-icon cart-icon" title="Корзина">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span id="cart-counter" class="counter">0</span>
+        </a>
+        <a href="login.html" class="action-icon profile-icon" title="Личный кабинет">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+      </div>
+      <button class="mobile-menu-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+    <main>
+      <div class="container py-4">
+        <h1 class="page-title">Контакты</h1>
+        <p class="lead-text">
+          Мы всегда на связи и готовы ответить на ваши вопросы
+        </p>
+      </div>
+      
+      <section class="contact-section">
+        <div class="container">
+          <div class="contact-container">
+            <div class="contact-form-container">
+              <h2>Отправить сообщение</h2>
+              <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                  <label for="name">Ваше имя</label>
+                  <input type="text" id="name" placeholder="Иван Иванов" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">Электронная почта</label>
+                  <input type="email" id="email" placeholder="ivan@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="message">Сообщение</label>
+                  <textarea id="message" rows="4" placeholder="Напишите ваш вопрос или сообщение..." required></textarea>
+                </div>
+                
+                <button type="submit">
+                  Отправить сообщение
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+              </section>
+        <div class="chat-widget">
+          <button id="chat-button" class="chat-toggle-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </button>
+          <div id="chat-container" class="chat-container hidden">
+            <!-- Chat interface will be loaded here -->
+          </div>
+        </div>
+      </main>
+    
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3 class="footer-title">The X Shop</h3>
+        <p>Качественные товары из Китая по доступным ценам</p>
+      </div>
+      <div class="footer-column">
+        <h4 class="footer-title">Информация</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="delivery.html">Доставка</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4 class="footer-title">Помощь</h4>
+        <ul class="footer-links">
+          <li><a href="terms.html">Условия использования</a></li>
+          <li><a href="privacy.html">Политика конфиденциальности</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2020 The X Shop. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(101964387, "init", {
+            defer: true,
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            ecommerce:"dataLayer"
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101964387" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    <!-- Необходимый скрипт для Lovable -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    
+    <!-- Скрипты для функциональности страницы -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script>
+      // Обработчик отправки формы
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        // В реальном проекте здесь будет отправка данных на сервер
+        console.log('Отправка формы:', { name, email, message });
+        
+        // Показываем уведомление об успешной отправке
+        showNotification('Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.');
+        
+        // Очищаем форму
+        this.reset();
+      });
+      
+      // Функция для показа уведомления
+      function showNotification(message) {
+        // Создаем элемент уведомления
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        
+        // Добавляем стили
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.right = '20px';
+        notification.style.backgroundColor = 'white';
+        notification.style.color = 'var(--text-color)';
+        notification.style.padding = '10px 15px';
+        notification.style.borderRadius = '4px';
+        notification.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.15)';
+        notification.style.zIndex = '1000';
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(20px)';
+        notification.style.transition = 'opacity 0.3s, transform 0.3s';
+        
+        // Добавляем на страницу
+        document.body.appendChild(notification);
+        
+        // Анимация появления
+        setTimeout(() => {
+          notification.style.opacity = '1';
+          notification.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Удаление через 3 секунды
+        setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 3000);
+      }
+    </script>
+      <script src="js/chat.js"></script>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+{
+  "products": [
+    {
+      "id": "test-1",
+      "title": "Смарт-часы DT 8 Mini",
+      "description": "Умные часы с мониторингом здоровья",
+      "price": 3500,
+      "category": "Смарт-часы",
+      "imageUrl": "/placeholder.svg",
+      "rating": 4.8,
+      "inStock": true,
+      "stockQuantity": 10,
+      "colors": [
+        "Черный",
+        "Серебристый"
+      ],
+      "specifications": {
+        "Экран": "1.4\" AMOLED",
+        "Батарея": "350mAh",
+        "Водонепроницаемость": "IP68"
+      },
+      "archived": false,
+      "isNew": true,
+      "isBestseller": false,
+      "countryOfOrigin": "Китай",
+      "material": "Пластик, металл",
+      "articleNumber": "DT8-MINI-001",
+      "barcode": "1234567890123"
+    },
+    {
+      "id": "test-2",
+      "title": "Планшет Android 10\"",
+      "description": "Планшет с Android и игровой клавиатурой",
+      "price": 12000,
+      "category": "Планшеты",
+      "imageUrl": "/placeholder.svg",
+      "rating": 4.7,
+      "inStock": true,
+      "stockQuantity": 5,
+      "colors": [
+        "Серый",
+        "Черный"
+      ],
+      "specifications": {
+        "Экран": "10.1\" IPS",
+        "Процессор": "MediaTek MT8183",
+        "Память": "4GB RAM + 64GB ROM"
+      },
+      "archived": false,
+      "isNew": false,
+      "isBestseller": true,
+      "countryOfOrigin": "Китай",
+      "material": "Пластик, стекло",
+      "articleNumber": "TAB-10-001",
+      "barcode": "1234567890124"
+    },
+    {
+      "id": "test-3",
+      "title": "Проектор Full HD",
+      "description": "Домашний проектор для фильмов",
+      "price": 8000,
+      "category": "Проекторы",
+      "imageUrl": "/placeholder.svg",
+      "rating": 4.6,
+      "inStock": true,
+      "stockQuantity": 3,
+      "colors": [
+        "Белый"
+      ],
+      "specifications": {
+        "Разрешение": "1920x1080",
+        "Яркость": "3000 ANSI люмен",
+        "Контрастность": "1000:1"
+      },
+      "archived": false,
+      "isNew": false,
+      "isBestseller": false,
+      "countryOfOrigin": "Китай",
+      "material": "Пластик",
+      "articleNumber": "PROJ-FHD-001",
+      "barcode": "1234567890125"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Смарт-часы",
+      "description": "Умные часы и фитнес-браслеты",
+      "imageUrl": "/placeholder.svg",
+      "created_at": "2025-06-29T15:39:19.199Z",
+      "updated_at": "2025-06-29T15:39:19.209Z"
+    },
+    {
+      "id": "2",
+      "name": "Планшеты",
+      "description": "Планшеты и планшетные компьютеры",
+      "imageUrl": "/placeholder.svg",
+      "created_at": "2025-06-29T15:39:19.209Z",
+      "updated_at": "2025-06-29T15:39:19.209Z"
+    },
+    {
+      "id": "3",
+      "name": "Проекторы",
+      "description": "Домашние и портативные проекторы",
+      "imageUrl": "/placeholder.svg",
+      "created_at": "2025-06-29T15:39:19.209Z",
+      "updated_at": "2025-06-29T15:39:19.209Z"
+    }
+  ]
+}

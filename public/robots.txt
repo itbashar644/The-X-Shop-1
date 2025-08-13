@@ -1,0 +1,37 @@
+
+# Allow crawling of all content for Yandex bots
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YaDirectFetcher
+Allow: /
+Crawl-delay: 1
+
+# Allow other major bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Allow all other crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin paths
+Disallow: /admin
+Disallow: /admin/*
+
+# Sitemap
+Sitemap: https://the-x.shop/sitemap.xml
+Sitemap: https://the-x.shop/static-catalog.html
+
+# Static catalog for crawlers
+Allow: /static-catalog.html

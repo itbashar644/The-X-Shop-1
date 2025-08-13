@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест функциональности корзины - The X Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .product-card {
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .stock-status {
+            margin-bottom: 10px;
+        }
+        .in-stock {
+            color: #38a169;
+        }
+        .out-of-stock {
+            color: #e53e3e;
+        }
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .color-option {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            background: white;
+        }
+        .color-option.selected {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .quantity-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .add-to-cart-btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .add-to-cart-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .add-to-cart-btn.loading {
+            background: #6c757d;
+        }
+        .cart-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #007bff;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .notification.success {
+            background: #28a745;
+        }
+        .notification.error {
+            background: #dc3545;
+        }
+        .notification.info {
+            background: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Тест функциональности добавления в корзину</h1>
+        
+        <div class="test-section">
+            <h3>Тестовые товары</h3>
+            
+            <!-- Товар 1: В наличии -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/100x100/4CAF50/white?text=Товар+1" alt="Товар 1" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">Смарт-часы DT-8 Mini</div>
+                    <div class="product-price">₽ 2,990</div>
+                    <div class="stock-status in-stock">В наличии</div>
+                    
+                    <div class="color-options">
+                        <div class="color-option selected" data-color="Черный">Черный</div>
+                        <div class="color-option" data-color="Серый">Серый</div>
+                        <div class="color-option" data-color="Золотой">Золотой</div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="changeQuantity(1, -1)">-</button>
+                        <input type="number" class="quantity-input" value="1" min="1" max="10" onchange="changeQuantity(1, this.value)">
+                        <button class="quantity-btn" onclick="changeQuantity(1, 1)">+</button>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addToCart(1)" data-product-id="1">
+                        Добавить в корзину
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Товар 2: Нет в наличии -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/100x100/FF5722/white?text=Товар+2" alt="Товар 2" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">Детский планшет WO-38</div>
+                    <div class="product-price">₽ 4,590</div>
+                    <div class="stock-status out-of-stock">Нет в наличии</div>
+                    
+                    <div class="color-options">
+                        <div class="color-option selected" data-color="Розовый">Розовый</div>
+                        <div class="color-option" data-color="Синий">Синий</div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="changeQuantity(2, -1)">-</button>
+                        <input type="number" class="quantity-input" value="1" min="1" max="5" onchange="changeQuantity(2, this.value)">
+                        <button class="quantity-btn" onclick="changeQuantity(2, 1)">+</button>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addToCart(2)" data-product-id="2" disabled>
+                        Нет в наличии
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Товар 3: Ограниченное количество -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/100x100/2196F3/white?text=Товар+3" alt="Товар 3" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">Беспроводные наушники Air Pro</div>
+                    <div class="product-price">₽ 1,890</div>
+                    <div class="stock-status in-stock">В наличии (3 шт.)</div>
+                    
+                    <div class="color-options">
+                        <div class="color-option selected" data-color="Белый">Белый</div>
+                        <div class="color-option" data-color="Черный">Черный</div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="changeQuantity(3, -1)">-</button>
+                        <input type="number" class="quantity-input" value="1" min="1" max="3" onchange="changeQuantity(3, this.value)">
+                        <button class="quantity-btn" onclick="changeQuantity(3, 1)">+</button>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addToCart(3)" data-product-id="3">
+                        Добавить в корзину
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cart-summary">
+            <h3>Корзина</h3>
+            <div id="cart-items">
+                <p>Корзина пуста</p>
+            </div>
+            <div class="cart-total">
+                Итого: <span id="cart-total">₽ 0</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Данные товаров
+        const products = {
+            1: { id: 1, title: "Смарт-часы DT-8 Mini", price: 2990, in_stock: true, stockQuantity: 15 },
+            2: { id: 2, title: "Детский планшет WO-38", price: 4590, in_stock: false, stockQuantity: 0 },
+            3: { id: 3, title: "Беспроводные наушники Air Pro", price: 1890, in_stock: true, stockQuantity: 3 }
+        };
+        
+        // Корзина
+        let cart = [];
+        let quantities = { 1: 1, 2: 1, 3: 1 };
+        let selectedColors = { 1: "Черный", 2: "Розовый", 3: "Белый" };
+        
+        // Изменение количества
+        function changeQuantity(productId, change) {
+            const input = document.querySelector(`[data-product-id="${productId}"]`).parentNode.querySelector('.quantity-input');
+            let newQuantity;
+            
+            if (typeof change === 'number') {
+                newQuantity = quantities[productId] + change;
+            } else {
+                newQuantity = parseInt(change);
+            }
+            
+            const maxStock = products[productId].stockQuantity;
+            newQuantity = Math.max(1, Math.min(newQuantity, maxStock));
+            
+            quantities[productId] = newQuantity;
+            input.value = newQuantity;
+        }
+        
+        // Выбор цвета
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('color-option')) {
+                const productCard = e.target.closest('.product-card');
+                const productId = parseInt(productCard.querySelector('.add-to-cart-btn').dataset.productId);
+                
+                // Убираем выделение со всех цветов
+                productCard.querySelectorAll('.color-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                // Выделяем выбранный цвет
+                e.target.classList.add('selected');
+                selectedColors[productId] = e.target.dataset.color;
+            }
+        });
+        
+        // Добавление в корзину
+        async function addToCart(productId) {
+            const product = products[productId];
+            const quantity = quantities[productId];
+            const color = selectedColors[productId];
+            const button = document.querySelector(`[data-product-id="${productId}"]`);
+            
+            if (!product.in_stock) {
+                showNotification('Товар недоступен для добавления в корзину', 'error');
+                return;
+            }
+            
+            if (quantity > product.stockQuantity) {
+                showNotification(`Доступно только ${product.stockQuantity} шт. товара`, 'error');
+                return;
+            }
+            
+            // Имитация загрузки
+            button.classList.add('loading');
+            button.textContent = 'Добавляем...';
+            button.disabled = true;
+            
+            // Имитация асинхронной операции
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Проверяем, есть ли уже такой товар в корзине
+            const existingItemIndex = cart.findIndex(item => 
+                item.productId === productId && item.color === color
+            );
+            
+            if (existingItemIndex >= 0) {
+                // Обновляем количество
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Добавляем новый товар
+                cart.push({
+                    productId,
+                    title: product.title,
+                    price: product.price,
+                    quantity,
+                    color
+                });
+            }
+            
+            // Обновляем отображение корзины
+            updateCartDisplay();
+            
+            // Показываем уведомление
+            const colorText = color ? ` (${color})` : '';
+            showNotification(`${product.title}${colorText} добавлен в корзину`, 'success');
+            
+            // Сбрасываем состояние кнопки
+            button.classList.remove('loading');
+            button.textContent = 'Добавить в корзину';
+            button.disabled = false;
+        }
+        
+        // Обновление отображения корзины
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Корзина пуста</p>';
+                cartTotal.textContent = '₽ 0';
+                return;
+            }
+            
+            let total = 0;
+            let itemsHtml = '';
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                itemsHtml += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.title}</strong>
+                            ${item.color ? ` (${item.color})` : ''}
+                            <br>
+                            <small>Количество: ${item.quantity} шт.</small>
+                        </div>
+                        <div>₽ ${itemTotal.toLocaleString()}</div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = itemsHtml;
+            cartTotal.textContent = `₽ ${total.toLocaleString()}`;
+        }
+        
+        // Показ уведомлений
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Инициализация
+        updateCartDisplay();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,14 @@
+
+В файл package.json в секцию "scripts" добавьте:
+
+"generate": "node scripts/generate-static-pages.js",
+
+Полная секция scripts должна выглядеть так:
+"scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "build:dev": "vite build --mode development",
+  "generate": "node scripts/generate-static-pages.js",
+  "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+  "preview": "vite preview"
+}

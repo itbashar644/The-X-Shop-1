@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина | The X Shop</title>
+    <meta name="description" content="Корзина товаров из Китая высокого качества по доступным ценам">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="index.html">The X Shop</a>
+          </div>
+          
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li><a href="index.html" class="nav-link">Главная</a></li>
+              <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+              <li><a href="about.html" class="nav-link">О нас</a></li>
+              <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+            </ul>
+          </nav>
+          
+          <div class="header-actions">
+            <a href="catalog.html?focus=search" class="action-icon search-icon" title="Поиск">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </a>
+            <a href="wishlist.html" class="action-icon wishlist-icon" title="Избранное">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+            </a>
+            <a href="cart.html" class="action-icon cart-icon active" title="Корзина">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              <span id="cart-counter" class="counter">0</span>
+            </a>
+            <a href="login.html" class="action-icon profile-icon" title="Личный кабинет">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </a>
+          </div>
+          
+          <button class="mobile-menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Cart Header -->
+      <section class="section-padding-sm bg-light">
+        <div class="container">
+          <h1>Корзина</h1>
+          <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / <span>Корзина</span>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Cart Content -->
+      <section class="section-padding">
+        <div class="container">
+          <div class="cart-page-layout">
+            <div id="cart-container" class="cart-container">
+              <!-- Cart will be loaded dynamically here -->
+            </div>
+            
+            <!-- Checkout Form (Only shows when cart has items) -->
+            <div id="checkout-form-container" class="checkout-form-container">
+              <div class="checkout-form-wrapper">
+                <h2>Оформление заказа</h2>
+                <form id="checkout-form">
+                  <div class="form-section">
+                    <h3>Контактные данные</h3>
+                    <div class="form-row form-row-2">
+                      <div class="form-group">
+                        <label for="name">ФИО <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="phone">Телефон <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email <span class="required">*</span></label>
+                      <input type="email" id="email" name="email" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-section">
+                    <h3>Адрес доставки</h3>
+                    <div class="form-group">
+                      <label for="address">Полный адрес <span class="required">*</span></label>
+                      <textarea id="address" name="address" rows="3" required placeholder="Город, улица, дом, квартира, индекс"></textarea>
+                    </div>
+                    </div>
+                  <div class="form-group">
+                    <label for="comment">Комментарий к заказу</label>
+                    <textarea id="comment" name="comment" rows="2" placeholder="Дополнительные пожелания к заказу"></textarea>
+                  </div>
+                </div>
+                <div class="form-section">
+                  <h3>Способ доставки</h3>
+                  <div class="contact-methods">
+                    <label class="contact-method">
+                      <input type="radio" name="delivery_method" value="cdek" checked>
+                      <span class="contact-method-name">СДЭК</span>
+                    </label>
+                    <label class="contact-method">
+                      <input type="radio" name="delivery_method" value="russianpost">
+                      <span class="contact-method-name">Почта РФ</span>
+                    </label>
+                    <label class="contact-method">
+                      <input type="radio" name="delivery_method" value="wbtrack">
+                      <span class="contact-method-name">WB Track</span>
+                    </label>
+                  </div>
+                </div>
+                  
+                  <div class="form-section">
+                    <h3>Предпочтительный способ связи</h3>
+                    <div class="contact-methods">
+                      <label class="contact-method">
+                        <input type="radio" name="contact_method" value="phone" checked>
+                        <div class="contact-method-icon phone-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </div>
+                        <span class="contact-method-name">По телефону</span>
+                      </label>
+                      <label class="contact-method">
+                        <input type="radio" name="contact_method" value="telegram">
+                        <div class="contact-method-icon">
+                          <img src="lovable-uploads/eeca568c-aa0a-4169-8a72-46a1d9746536.png" alt="Telegram" width="24" height="24">
+                        </div>
+                        <span class="contact-method-name">Telegram</span>
+                      </label>
+                      <label class="contact-method">
+                        <input type="radio" name="contact_method" value="whatsapp">
+                        <div class="contact-method-icon">
+                          <img src="lovable-uploads/6fc205ab-6c5e-4d07-97bf-08052b285a4f.png" alt="WhatsApp" width="24" height="24">
+                        </div>
+                        <span class="contact-method-name">WhatsApp</span>
+                      </label>
+                    </div>
+                    
+                    <div id="telegram-username-container" class="telegram-username-container" style="display: none;">
+                      <div class="form-group">
+                        <label for="telegram_username">Ваш Telegram username <span class="required">*</span></label>
+                        <input type="text" id="telegram_username" name="telegram_username" placeholder="@username">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-section checkout-agreement">
+                    <label class="checkbox-label">
+                      <input type="checkbox" required name="agreement">
+                      <span>Я согласен с <a href="terms.html" target="_blank">условиями оферты</a> и <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span>
+                    </label>
+                  </div>
+                  
+                  <div class="form-actions">
+                    <button type="submit" class="btn primary-btn place-order-btn">Оформить заказ</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Chat Button -->
+      <div class="chat-widget">
+        <button id="chat-button" class="chat-toggle-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+        <div id="chat-container" class="chat-container hidden">
+          <!-- Chat interface will be loaded here -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3 class="footer-title">The X Shop</h3>
+            <p>Качественные товары из Китая по доступным ценам</p>
+          </div>
+          
+          <div class="footer-column">
+            <h4 class="footer-title">Каталог</h4>
+            <ul class="footer-links">
+              <li><a href="catalog.html">Все товары</a></li>
+              <li><a href="catalog.html?category=Электроника">Электроника</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4 class="footer-title">Информация</h4>
+            <ul class="footer-links">
+              <li><a href="about.html">О нас</a></li>
+              <li><a href="delivery.html">Доставка и оплата</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2020 The X Shop. Все права защищены.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // Скрипт для отображения поля telegram username при выборе Telegram как способа связи
+      document.addEventListener('DOMContentLoaded', function() {
+        const contactMethodRadios = document.querySelectorAll('input[name="contact_method"]');
+        const telegramUsernameContainer = document.getElementById('telegram-username-container');
+        
+        contactMethodRadios.forEach(radio => {
+          radio.addEventListener('change', function() {
+            if (this.value === 'telegram') {
+              telegramUsernameContainer.style.display = 'block';
+              document.getElementById('telegram_username').setAttribute('required', '');
+            } else {
+              telegramUsernameContainer.style.display = 'none';
+              document.getElementById('telegram_username').removeAttribute('required');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

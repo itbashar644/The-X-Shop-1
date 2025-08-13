@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Shche/OneDrive/Рабочий стол/v1/script.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="7264"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="0" parent="0"/><expanded_item id="8" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="products" custom_title="0" dock_id="2" table="4,8:mainproducts"/><table title="categories" custom_title="0" dock_id="1" table="4,10:maincategories"/><table title="products" custom_title="0" dock_id="3" table="4,8:mainproducts"/><dock_state state="000000ff00000000fd0000000100000002000003bf000002b6fc0100000001fc00000000000003bf0000012800fffffffa000000000100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000012800fffffffb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000012800fffffffb000000160064006f0063006b00420072006f00770073006500330100000000ffffffff0000012800ffffff000002720000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="products" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="31"/><column index="3" value="70"/><column index="4" value="36"/><column index="5" value="90"/><column index="6" value="59"/><column index="7" value="64"/><column index="8" value="110"/><column index="9" value="42"/><column index="10" value="55"/><column index="11" value="42"/><column index="12" value="35"/><column index="13" value="55"/><column index="14" value="108"/><column index="15" value="84"/><column index="16" value="48"/><column index="17" value="78"/><column index="18" value="93"/><column index="19" value="53"/><column index="20" value="57"/><column index="21" value="92"/><column index="22" value="58"/><column index="23" value="56"/><column index="24" value="91"/><column index="25" value="88"/><column index="26" value="61"/><column index="27" value="70"/><column index="28" value="68"/><column index="29" value="72"/><column index="30" value="80"/><column index="31" value="97"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">-- Вставляем категории
+
+INSERT OR IGNORE INTO categories (id, name) VALUES
+
+('cat1', 'Электроника'),
+
+('cat2', 'Одежда'),
+
+('cat3', 'Книги'),
+
+('cat4', 'Обувь');
+
+
+
+-- Вставляем продукты
+
+INSERT INTO products (
+
+  id, 
+
+  title, 
+
+  description, 
+
+  price, 
+
+  discount_price,
+
+  category,
+
+  image_url,
+
+  additional_images,
+
+  rating,
+
+  in_stock,
+
+  colors,
+
+  sizes,
+
+  material,
+
+  country_of_origin,
+
+  specifications,
+
+  is_new,
+
+  is_bestseller,
+
+  article_number,
+
+  barcode,
+
+  stock_quantity,
+
+  color_variants,
+
+  model_name,
+
+  wildberries_sku
+
+) VALUES 
+
+(
+
+  '550e8400-e29b-41d4-a716-446655440000',
+
+  'Смартфон Xiaomi Redmi Note 12',
+
+  '6.67&quot; AMOLED дисплей, 120 Гц, Snapdragon 685, 5000 mAh',
+
+  19999.99,
+
+  17999.99,
+
+  'Электроника',
+
+  '/phones/xiaomi_redmi_note_12.jpg',
+
+  '[&quot;/phones/xiaomi1.jpg&quot;, &quot;/phones/xiaomi2.jpg&quot;]',
+
+  4.7,
+
+  1,
+
+  '[&quot;черный&quot;, &quot;синий&quot;, &quot;белый&quot;]',
+
+  '[]',
+
+  'Стекло, пластик',
+
+  'Китай',
+
+  '{&quot;Диагональ экрана&quot;: &quot;6.67 дюйма&quot;, &quot;Разрешение&quot;: &quot;2400x1080&quot;, &quot;ОЗУ&quot;: &quot;6 ГБ&quot;, &quot;Память&quot;: &quot;128 ГБ&quot;}',
+
+  1,
+
+  1,
+
+  'XIA-RN12-BLK',
+
+  '1234567890123',
+
+  15,
+
+  '{&quot;черный&quot;: &quot;/images/black.jpg&quot;, &quot;синий&quot;: &quot;/images/blue.jpg&quot;, &quot;белый&quot;: &quot;/images/white.jpg&quot;}',
+
+  'Redmi Note 12',
+
+  'WB-RN12-BLK'
+
+),
+
+(
+
+  '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+
+  'Футболка мужская хлопковая',
+
+  '100% хлопок, принт на груди, классический крой',
+
+  1299.00,
+
+  999.00,
+
+  'Одежда',
+
+  '/tshirts/basic_white.jpg',
+
+  '[&quot;/tshirts/white1.jpg&quot;, &quot;/tshirts/white2.jpg&quot;]',
+
+  4.9,
+
+  1,
+
+  '[&quot;белый&quot;, &quot;черный&quot;, &quot;серый&quot;]',
+
+  '[&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;XL&quot;]',
+
+  'Хлопок',
+
+  'Бангладеш',
+
+  '{&quot;Состав&quot;: &quot;100% хлопок&quot;, &quot;Уход&quot;: &quot;Стирка при 30°C&quot;}',
+
+  0,
+
+  1,
+
+  'T-SHIRT-BASIC',
+
+  '2345678901234',
+
+  42,
+
+  '{&quot;белый&quot;: &quot;/images/white_tshirt.jpg&quot;, &quot;черный&quot;: &quot;/images/black_tshirt.jpg&quot;, &quot;серый&quot;: &quot;/images/grey_tshirt.jpg&quot;}',
+
+  'Basic T-Shirt',
+
+  'WB-TS-BASIC'
+
+),
+
+(
+
+  'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+
+  'Изучаем Python. Том 1',
+
+  'Лучший учебник по Python для начинающих',
+
+  1499.00,
+
+  NULL,
+
+  'Книги',
+
+  '/books/python_vol1.jpg',
+
+  '[&quot;/books/python1.jpg&quot;, &quot;/books/python2.jpg&quot;]',
+
+  4.8,
+
+  1,
+
+  '[]',
+
+  '[]',
+
+  'Бумага',
+
+  'Россия',
+
+  '{&quot;Автор&quot;: &quot;Марк Лутц&quot;, &quot;Страниц&quot;: 1024, &quot;Издательство&quot;: &quot;Диалектика&quot;}',
+
+  1,
+
+  0,
+
+  'BOOK-PYTHON-V1',
+
+  '3456789012345',
+
+  8,
+
+  NULL,
+
+  'Learning Python',
+
+  'WB-BOOK-PYTHON1'
+
+),
+
+(
+
+  '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed',
+
+  'Беспроводные наушники Sony WH-1000XM5',
+
+  'Превосходное шумоподавление, 30 часов работы',
+
+  29999.00,
+
+  27999.00,
+
+  'Электроника',
+
+  '/headphones/sony_xm5.jpg',
+
+  '[&quot;/headphones/sony1.jpg&quot;, &quot;/headphones/sony2.jpg&quot;]',
+
+  4.9,
+
+  1,
+
+  '[&quot;черный&quot;, &quot;серебристый&quot;]',
+
+  '[]',
+
+  'Пластик, металл',
+
+  'Япония',
+
+  '{&quot;Тип&quot;: &quot;Накладные&quot;, &quot;Bluetooth&quot;: &quot;5.2&quot;, &quot;Время работы&quot;: &quot;30 часов&quot;}',
+
+  1,
+
+  1,
+
+  'SNY-WH1000XM5',
+
+  '4567890123456',
+
+  5,
+
+  '{&quot;черный&quot;: &quot;/images/black_headphones.jpg&quot;, &quot;серебристый&quot;: &quot;/images/silver_headphones.jpg&quot;}',
+
+  'WH-1000XM5',
+
+  'WB-SONY-XM5'
+
+),
+
+(
+
+  '9c4d6d0b-7b3a-4e50-b4a2-7d7c8e9f0a1b',
+
+  'Кроссовки Nike Air Max 270',
+
+  'Удобные повседневные кроссовки с технологией Air',
+
+  8999.00,
+
+  7999.00,
+
+  'Обувь',
+
+  '/shoes/nike_air_max.jpg',
+
+  '[&quot;/shoes/nike1.jpg&quot;, &quot;/shoes/nike2.jpg&quot;]',
+
+  4.6,
+
+  1,
+
+  '[&quot;белый&quot;, &quot;черный&quot;, &quot;красный&quot;]',
+
+  '[&quot;38&quot;, &quot;39&quot;, &quot;40&quot;, &quot;41&quot;, &quot;42&quot;, &quot;43&quot;, &quot;44&quot;]',
+
+  'Текстиль, синтетика',
+
+  'Вьетнам',
+
+  '{&quot;Тип&quot;: &quot;Кроссовки&quot;, &quot;Вес&quot;: &quot;320 г&quot;, &quot;Амортизация&quot;: &quot;Air Max&quot;}',
+
+  0,
+
+  1,
+
+  'NIKE-AIRMAX270',
+
+  '5678901234567',
+
+  23,
+
+  '{&quot;белый&quot;: &quot;/images/white_shoes.jpg&quot;, &quot;черный&quot;: &quot;/images/black_shoes.jpg&quot;, &quot;красный&quot;: &quot;/images/red_shoes.jpg&quot;}',
+
+  'Air Max 270',
+
+  'WB-NIKE-AIR270'
+
+);
+
+
+
+-- Обновляем ссылки (опционально)
+
+UPDATE products SET 
+
+  ozon_url = 'https://www.ozon.ru/product/' || id,
+
+  wildberries_url = 'https://www.wildberries.ru/catalog/' || id || '/detail.aspx',
+
+  avito_url = 'https://www.avito.ru/moskva/tovary_dlya_kompyutera/' || id;</sql><current_tab id="0"/></tab_sql></sqlb_project>

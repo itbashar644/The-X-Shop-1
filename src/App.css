@@ -1,0 +1,154 @@
+
+#root {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  text-align: inherit;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+ 
+
+ 
+
+/* Reset scroll position on page load and navigation */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-y: auto;
+  scroll-padding-top: 64px; /* Размер верхней навигации для якорных ссылок */
+}
+
+/* Ensure content always starts at the top */
+#root > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Disable any automatic scroll anchoring */
+* {
+  overflow-anchor: none;
+}
+
+/* Additional reset for route changes */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Улучшения для SEO - добавляем стили для семантических элементов */
+main {
+  display: block;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+article {
+  margin-bottom: 1.5rem;
+}
+
+/* Для доступности - фокус на интерактивных элементах */
+a:focus, button:focus, input:focus, textarea:focus, select:focus, 
+[role="button"]:focus, [tabindex]:focus {
+  outline: 2px solid rgba(66, 153, 225, 0.5);
+  outline-offset: 2px;
+}
+
+/* Скрываем элементы только визуально, но не от скринридеров */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Улучшения для админ-панели */
+.admin-panel-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.admin-sidebar {
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Корректировка для SidebarInset, чтобы содержимое правильно отображалось */
+[data-sidebar="sidebar-inset"] {
+  display: block;
+  height: auto;
+  overflow-y: auto;
+}
+
+/* Дополнительные стили для прокрутки в админке */
+.admin-panel {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.admin-content-area {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Исправление для мобильных уведомлений об добавлении в корзину */
+@media (max-width: 768px) {
+  [role="toast"] {
+    max-width: 80vw;
+  }
+  
+  .sonner-toast {
+    max-width: 90%;
+    width: auto !important;
+    animation: toast-in-right 0.6s !important;
+    animation-fill-mode: forwards !important;
+  }
+  
+  .sonner-toast-container {
+    position: fixed !important;
+    z-index: 100;
+  }
+  
+  /* Добавляем анимацию автоматического исчезновения для мобильных уведомлений */
+  @keyframes toast-auto-hide {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes toast-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .sonner-toast-viewport {
+    margin: 0 !important;
+  }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Stock Status с in_stock</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-info { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .stock-status { font-weight: bold; margin: 10px 0; }
+        .in-stock { color: green; }
+        .out-of-stock { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Тест Stock Status с in_stock</h1>
+    <div id="debug-container"></div>
+
+    <script>
+        // Моковые данные продукта с in_stock
+        const mockProduct = {
+            id: 'e635efae-a4b6-492f-82cb-b5301e0d8c17',
+            title: 'Умные смарт-часы 8 серии Smart Watch X8 SE 8 Gray 45mm',
+            description: 'Современные умные часы с мониторингом здоровья и уведомлениями',
+            price: 4500,
+            category: 'Смарт-часы',
+            imageUrl: '/placeholder.svg',
+            rating: 4.8,
+            inStock: true,
+            in_stock: true, // Основной источник данных о наличии
+            stockQuantity: 15,
+            colors: ['Серый', 'Черный'],
+            specifications: {
+                'Экран': '1.4" AMOLED',
+                'Батарея': '350mAh',
+                'Водонепроницаемость': 'IP68',
+                'Размер': '45mm'
+            },
+            archived: false,
+            isNew: true,
+            isBestseller: true,
+            countryOfOrigin: 'Китай',
+            material: 'Пластик, металл',
+            articleNumber: 'X8-SE-001',
+            barcode: '1234567890123'
+        };
+
+        function getStockStatusText(product, selectedColor, hasStock) {
+            console.log('getStockStatusText called with:', { product, selectedColor, hasStock });
+            
+            if (!product) return "";
+            
+            // If there's a selected color variant, check its stock first
+            if (selectedColor && product.colorVariants?.length) {
+                const variant = product.colorVariants.find(v => v.color === selectedColor);
+                if (variant) {
+                    const variantStock = variant.stockQuantity !== null && variant.stockQuantity !== undefined 
+                        ? Number(variant.stockQuantity) || 0 
+                        : 0;
+                    console.log('Variant stock check:', { color: selectedColor, variantStock, variant });
+                    return variantStock > 0 ? "В наличии" : "Нет в наличии";
+                }
+            }
+            
+            // Check main product stock quantity with safe conversion
+            if (product.stockQuantity !== null && product.stockQuantity !== undefined) {
+                const stockQty = Number(product.stockQuantity);
+                console.log('Main product stock check:', { stockQty, isNaN: isNaN(stockQty) });
+                return !isNaN(stockQty) && stockQty > 0 ? "В наличии" : "Нет в наличии";
+            }
+            
+            // Fallback to hasStock prop or in_stock flag (основной источник данных)
+            console.log('Fallback check:', { hasStock, in_stock: product.in_stock });
+            return hasStock || Boolean(product.in_stock) ? "В наличии" : "Нет в наличии";
+        }
+
+        function getStockStatusClass(product, selectedColor, hasStock) {
+            if (!product) return "";
+            
+            // If there's a selected color variant, check its stock first
+            if (selectedColor && product.colorVariants?.length) {
+                const variant = product.colorVariants.find(v => v.color === selectedColor);
+                if (variant) {
+                    const variantStock = variant.stockQuantity !== null && variant.stockQuantity !== undefined 
+                        ? Number(variant.stockQuantity) || 0 
+                        : 0;
+                    return variantStock > 0 ? "in-stock" : "out-of-stock";
+                }
+            }
+            
+            // Check main product stock quantity with safe conversion
+            if (product.stockQuantity !== null && product.stockQuantity !== undefined) {
+                const stockQty = Number(product.stockQuantity);
+                return !isNaN(stockQty) && stockQty > 0 ? "in-stock" : "out-of-stock";
+            }
+            
+            // Fallback to hasStock prop or in_stock flag (основной источник данных)
+            return hasStock || Boolean(product.in_stock) ? "in-stock" : "out-of-stock";
+        }
+
+        function testStockStatus() {
+            const container = document.getElementById('debug-container');
+            
+            // Тест 1: Без выбранного цвета
+            const status1 = getStockStatusText(mockProduct, undefined, true);
+            const class1 = getStockStatusClass(mockProduct, undefined, true);
+            
+            // Тест 2: С выбранным цветом (но без colorVariants)
+            const status2 = getStockStatusText(mockProduct, 'Серый', true);
+            const class2 = getStockStatusClass(mockProduct, 'Серый', true);
+            
+            // Тест 3: С hasStock = false
+            const status3 = getStockStatusText(mockProduct, undefined, false);
+            const class3 = getStockStatusClass(mockProduct, undefined, false);
+
+            // Тест 4: Товар без stockQuantity, только in_stock
+            const productWithoutStockQty = { ...mockProduct, stockQuantity: undefined };
+            const status4 = getStockStatusText(productWithoutStockQty, undefined, false);
+            const class4 = getStockStatusClass(productWithoutStockQty, undefined, false);
+
+            container.innerHTML = `
+                <div class="debug-info">
+                    <h3>Отладочная информация:</h3>
+                    <p><strong>Product ID:</strong> ${mockProduct.id}</p>
+                    <p><strong>Title:</strong> ${mockProduct.title}</p>
+                    <p><strong>stockQuantity:</strong> ${mockProduct.stockQuantity} (type: ${typeof mockProduct.stockQuantity})</p>
+                    <p><strong>inStock:</strong> ${mockProduct.inStock} (type: ${typeof mockProduct.inStock})</p>
+                    <p><strong>in_stock:</strong> ${mockProduct.in_stock} (type: ${typeof mockProduct.in_stock})</p>
+                    <p><strong>colors:</strong> ${JSON.stringify(mockProduct.colors)}</p>
+                    <p><strong>colorVariants:</strong> ${JSON.stringify(mockProduct.colorVariants)}</p>
+                </div>
+                
+                <div class="debug-info">
+                    <h3>Тесты:</h3>
+                    <p><strong>Тест 1 (без цвета, hasStock=true):</strong></p>
+                    <div class="stock-status ${class1}">${status1}</div>
+                    
+                    <p><strong>Тест 2 (с цветом 'Серый', hasStock=true):</strong></p>
+                    <div class="stock-status ${class2}">${status2}</div>
+                    
+                    <p><strong>Тест 3 (без цвета, hasStock=false):</strong></p>
+                    <div class="stock-status ${class3}">${status3}</div>
+                    
+                    <p><strong>Тест 4 (без stockQuantity, только in_stock):</strong></p>
+                    <div class="stock-status ${class4}">${status4}</div>
+                </div>
+            `;
+        }
+
+        // Запускаем тест при загрузке страницы
+        window.onload = testStockStatus;
+    </script>
+</body>
+</html> 

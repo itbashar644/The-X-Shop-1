@@ -1,0 +1,10 @@
+
+RewriteEngine On
+
+# Редирект для страниц товаров
+RewriteRule ^product/([^/]+)$ /product-$1.html [L]
+
+# Fallback на index.html для SPA
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

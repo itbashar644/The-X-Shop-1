@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров | The X Shop - Товары из Китая</title>
+    <meta name="description" content="Полный каталог товаров из Китая высокого качества по доступным ценам. Минималистичный дизайн, большой выбор товаров для дома.">
+    <meta name="keywords" content="товары из Китая, каталог товаров, минималистичный дизайн, товары для дома, доступные цены">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://the-x.shop/static-catalog.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Каталог товаров | The X Shop">
+    <meta property="og:description" content="Полный каталог товаров из Китая высокого качества по доступным ценам">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://the-x.shop/static-catalog.html">
+    <meta property="og:image" content="https://the-x.shop/lovable-uploads/20f4bfd6-6f1c-40b7-9d9c-9b1be8939979.png">
+    <meta property="og:site_name" content="The X Shop">
+    
+    <!-- Twitter Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Каталог товаров | The X Shop">
+    <meta name="twitter:description" content="Полный каталог товаров из Китая высокого качества по доступным ценам">
+    <meta name="twitter:image" content="https://the-x.shop/lovable-uploads/20f4bfd6-6f1c-40b7-9d9c-9b1be8939979.png">
+    
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6; 
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px solid #eee;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0;
+        }
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 40px;
+        }
+        .product-card { 
+            border: 1px solid #ddd; 
+            border-radius: 12px; 
+            padding: 20px; 
+            background: white; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        .product-image { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            margin-bottom: 15px;
+        }
+        .product-title { 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin: 15px 0 10px 0; 
+            line-height: 1.4;
+        }
+        .product-title a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .product-title a:hover {
+            color: #3498db;
+        }
+        .product-price { 
+            color: #e74c3c; 
+            font-size: 20px; 
+            font-weight: bold; 
+            margin: 10px 0;
+        }
+        .product-description { 
+            color: #666; 
+            font-size: 14px; 
+            margin: 12px 0; 
+            line-height: 1.5;
+        }
+        .product-category {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .breadcrumbs { 
+            margin-bottom: 30px; 
+            color: #666; 
+            font-size: 14px;
+        }
+        .breadcrumbs a { 
+            color: #3498db; 
+            text-decoration: none; 
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .navigation { 
+            background: #2c3e50; 
+            padding: 15px 0; 
+            margin-bottom: 30px; 
+        }
+        .nav-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links { 
+            display: flex; 
+            gap: 30px; 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .nav-links a { 
+            text-decoration: none; 
+            color: white; 
+            font-weight: 500; 
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        .logo { 
+            font-size: 28px; 
+            font-weight: bold; 
+            color: white; 
+            text-decoration: none; 
+        }
+        .footer {
+            margin-top: 60px;
+            padding: 40px 0;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+        .footer p {
+            margin: 10px 0;
+            color: #666;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="https://the-x.shop/" class="logo">The X Shop</a>
+            <ul class="nav-links">
+                <li><a href="https://the-x.shop/">Главная</a></li>
+                <li><a href="https://the-x.shop/catalog">Каталог</a></li>
+                <li><a href="https://the-x.shop/about">О нас</a></li>
+                <li><a href="https://the-x.shop/contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" itemscope itemtype="https://schema.org/ItemList">
+        <div class="breadcrumbs">
+            <a href="https://the-x.shop/" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement">
+                <span itemprop="name">Главная</span>
+                <meta itemprop="position" content="1">
+            </a> / 
+            <span itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement">
+                <span itemprop="name">Каталог товаров</span>
+                <meta itemprop="position" content="2">
+            </span>
+        </div>
+
+        <header class="header">
+            <h1 itemprop="name">Каталог товаров из Китая</h1>
+            <p itemprop="description">Широкий выбор качественных товаров из Китая для вашего дома по доступным ценам</p>
+            <meta itemprop="numberOfItems" content="20">
+        </header>
+
+        <div class="products-grid">
+            <!-- Товар 1 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="1">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/96c6e31d-3cd8-496b-8495-1b63a8577aeb.png" 
+                     alt="Керамическая ваза в минималистичном стиле" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/ceramic-vase-minimalist" itemprop="url">Керамическая ваза в минималистичном стиле</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Элегантная керамическая ваза белого цвета, идеально подходящая для современного интерьера. Высококачественная керамика, стильный дизайн.
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="2500">2 500 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/ceramic-vase-minimalist">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="VASE001">
+            </article>
+
+            <!-- Товар 2 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="2">
+                <div class="product-category" itemprop="category">Освещение</div>
+                <img src="https://the-x.shop/lovable-uploads/2382cf41-b25e-4a18-b0ed-379ed4b92f63.png" 
+                     alt="Настольная лампа с деревянным основанием" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/wooden-desk-lamp" itemprop="url">Настольная лампа с деревянным основанием</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Стильная настольная лампа с натуральным деревянным основанием и белым абажуром. Создает мягкое освещение для работы и отдыха.
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="4200">4 200 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/wooden-desk-lamp">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="LAMP001">
+            </article>
+
+            <!-- Товар 3 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="3">
+                <div class="product-category" itemprop="category">Мебель</div>
+                <img src="https://the-x.shop/lovable-uploads/5e17e20e-4457-4c61-be22-2d405cd6a88e.png" 
+                     alt="Деревянная полка настенная" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/wooden-wall-shelf" itemprop="url">Деревянная полка настенная</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Практичная настенная полка из натурального дерева для хранения книг и декора. Прочная конструкция, простая установка.
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1800">1 800 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/wooden-wall-shelf">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="SHELF001">
+            </article>
+
+            <!-- Товар 4 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="4">
+                <div class="product-category" itemprop="category">Посуда</div>
+                <img src="https://the-x.shop/lovable-uploads/6fc205ab-6c5e-4d07-97bf-08052b285a4f.png" 
+                     alt="Керамическая кружка с минималистичным дизайном" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/ceramic-mug-minimal" itemprop="url">Керамическая кружка с минималистичным дизайном</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Стильная керамическая кружка в современном стиле, идеальна для кофе и чая
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="890">890 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/ceramic-mug-minimal">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="MUG001">
+            </article>
+
+            <!-- Товар 5 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="5">
+                <div class="product-category" itemprop="category">Текстиль</div>
+                <img src="https://the-x.shop/lovable-uploads/2d6239d5-f8e0-47da-94ea-53c5c11cd869.png" 
+                     alt="Подушка декоративная серая" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/decorative-pillow-gray" itemprop="url">Подушка декоративная серая</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Мягкая декоративная подушка серого цвета для создания уютной атмосферы
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1200">1 200 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/decorative-pillow-gray">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="PILLOW001">
+            </article>
+
+            <!-- Товар 6 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="6">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/762f1200-f023-4ca5-b000-0f11686f0904.png" 
+                     alt="Часы настенные круглые" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/round-wall-clock" itemprop="url">Часы настенные круглые</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Стильные настенные часы с минималистичным дизайном для современного интерьера
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="2800">2 800 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/round-wall-clock">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="CLOCK001">
+            </article>
+
+            <!-- Товар 7 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="7">
+                <div class="product-category" itemprop="category">Хранение</div>
+                <img src="https://the-x.shop/lovable-uploads/4d08cd77-bc35-424c-b00a-acc6abeb1b11.png" 
+                     alt="Корзина для хранения плетеная" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/woven-storage-basket" itemprop="url">Корзина для хранения плетеная</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Практичная плетеная корзина для хранения вещей и организации пространства
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1600">1 600 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/woven-storage-basket">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="BASKET001">
+            </article>
+
+            <!-- Товар 8 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="8">
+                <div class="product-category" itemprop="category">Освещение</div>
+                <img src="https://the-x.shop/lovable-uploads/c08f9eab-dd00-4949-baa0-82ab4bad889b.png" 
+                     alt="Светильник подвесной современный" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/modern-pendant-light" itemprop="url">Светильник подвесной современный</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Современный подвесной светильник для создания стильного освещения
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="5200">5 200 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/modern-pendant-light">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="PENDANT001">
+            </article>
+
+            <!-- Товар 9 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="9">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/ab959231-fd7d-4a09-9b4e-428144a0b03d.png" 
+                     alt="Зеркало настенное в раме" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/framed-wall-mirror" itemprop="url">Зеркало настенное в раме</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Элегантное настенное зеркало в стильной раме для любого интерьера
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="3400">3 400 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/framed-wall-mirror">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="MIRROR001">
+            </article>
+
+            <!-- Товар 10 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="10">
+                <div class="product-category" itemprop="category">Организация</div>
+                <img src="https://the-x.shop/lovable-uploads/e338f2d1-bca5-46f1-b305-fdc8cff079f6.png" 
+                     alt="Органайзер для стола деревянный" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/wooden-desk-organizer" itemprop="url">Органайзер для стола деревянный</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Практичный деревянный органайзер для упорядочивания рабочего места
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="2200">2 200 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/wooden-desk-organizer">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="ORGANIZER001">
+            </article>
+
+            <!-- Товар 11 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="11">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/cdd6cfcc-2939-4048-ad14-0718ccb5108b.png" 
+                     alt="Свеча ароматическая в стеклянной банке" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/scented-candle-glass" itemprop="url">Свеча ароматическая в стеклянной банке</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Ароматическая свеча в элегантной стеклянной банке для создания уютной атмосферы
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="950">950 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/scented-candle-glass">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="CANDLE001">
+            </article>
+
+            <!-- Товар 12 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="12">
+                <div class="product-category" itemprop="category">Текстиль</div>
+                <img src="https://the-x.shop/lovable-uploads/32c1792b-a62c-44f1-ba99-7d179f625064.png" 
+                     alt="Коврик прикроватный мягкий" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/soft-bedside-rug" itemprop="url">Коврик прикроватный мягкий</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Мягкий прикроватный коврик для комфорта и уюта в спальне
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1350">1 350 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/soft-bedside-rug">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="RUG001">
+            </article>
+
+            <!-- Товар 13 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="13">
+                <div class="product-category" itemprop="category">Организация</div>
+                <img src="https://the-x.shop/lovable-uploads/b1cb4ce9-8bc4-48a9-83c3-f578212965a7.png" 
+                     alt="Держатель для книг металлический" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/metal-bookend" itemprop="url">Держатель для книг металлический</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Стильный металлический держатель для организации книг на полке
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="750">750 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/metal-bookend">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="BOOKEND001">
+            </article>
+
+            <!-- Товар 14 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="14">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/de373e15-1fec-4c44-b0d2-f330b4b01505.png" 
+                     alt="Горшок для растений керамический" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/ceramic-plant-pot" itemprop="url">Горшок для растений керамический</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Стильный керамический горшок для комнатных растений и цветов
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1100">1 100 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/ceramic-plant-pot">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="POT001">
+            </article>
+
+            <!-- Товар 15 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="15">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/eeca568c-aa0a-4169-8a72-46a1d9746536.png" 
+                     alt="Рамка для фото деревянная" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/wooden-photo-frame" itemprop="url">Рамка для фото деревянная</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Элегантная деревянная рамка для фотографий и картин
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="680">680 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/wooden-photo-frame">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="FRAME001">
+            </article>
+
+            <!-- Товар 16 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="16">
+                <div class="product-category" itemprop="category">Освещение</div>
+                <img src="https://the-x.shop/lovable-uploads/df8ec6c9-6d3f-4ec5-b65f-72e13df2ea76.png" 
+                     alt="Лампа настольная LED" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/led-desk-lamp" itemprop="url">Лампа настольная LED</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Современная LED лампа с регулируемой яркостью для рабочего места
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="3800">3 800 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/led-desk-lamp">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="LEDLAMP001">
+            </article>
+
+            <!-- Товар 17 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="17">
+                <div class="product-category" itemprop="category">Текстиль</div>
+                <img src="https://the-x.shop/lovable-uploads/c9a01e33-cfba-4882-bd76-bf5242276fda.png" 
+                     alt="Полотенце банное мягкое" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/soft-bath-towel" itemprop="url">Полотенце банное мягкое</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Мягкое банное полотенце из качественного хлопка для комфорта
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1450">1 450 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/soft-bath-towel">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="TOWEL001">
+            </article>
+
+            <!-- Товар 18 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="18">
+                <div class="product-category" itemprop="category">Аксессуары</div>
+                <img src="https://the-x.shop/lovable-uploads/2a6149e2-4731-4f83-bcc9-e00d95412f6c.png" 
+                     alt="Подставка для телефона деревянная" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/wooden-phone-stand" itemprop="url">Подставка для телефона деревянная</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Удобная деревянная подставка для смартфона и планшета
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="590">590 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/wooden-phone-stand">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="PHONESTAND001">
+            </article>
+
+            <!-- Товар 19 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="19">
+                <div class="product-category" itemprop="category">Посуда</div>
+                <img src="https://the-x.shop/lovable-uploads/0b04b72a-65f0-4115-9cea-5a0f215b83d4.png" 
+                     alt="Набор тарелок керамических" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/ceramic-plates-set" itemprop="url">Набор тарелок керамических</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Элегантный набор керамических тарелок для стильной сервировки стола
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="2900">2 900 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/ceramic-plates-set">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="PLATES001">
+            </article>
+
+            <!-- Товар 20 -->
+            <article class="product-card" itemscope itemtype="https://schema.org/Product" itemprop="itemListElement">
+                <meta itemprop="position" content="20">
+                <div class="product-category" itemprop="category">Декор</div>
+                <img src="https://the-x.shop/lovable-uploads/96c6e31d-3cd8-496b-8495-1b63a8577aeb.png" 
+                     alt="Ваза для цветов стеклянная" 
+                     class="product-image" 
+                     itemprop="image">
+                <h2 class="product-title" itemprop="name">
+                    <a href="https://the-x.shop/product/glass-flower-vase" itemprop="url">Ваза для цветов стеклянная</a>
+                </h2>
+                <p class="product-description" itemprop="description">
+                    Изящная стеклянная ваза для свежих и искусственных цветов
+                </p>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span class="product-price" itemprop="price" content="1750">1 750 ₽</span>
+                    <meta itemprop="priceCurrency" content="RUB">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="url" content="https://the-x.shop/product/glass-flower-vase">
+                </div>
+                <meta itemprop="brand" content="The X Shop">
+                <meta itemprop="sku" content="GLASSVASE001">
+            </article>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 The X Shop. Все права защищены.</p>
+            <p><strong>Товары из Китая для вашего дома</strong> | <a href="https://the-x.shop/catalog">Перейти в интерактивный каталог</a></p>
+            <p>Качественные товары по доступным ценам | Быстрая доставка | Гарантия качества</p>
+        </footer>
+    </main>
+
+    <!-- Structured Data for WebSite -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "The X Shop",
+        "alternateName": "The X Shop - Товары из Китая",
+        "url": "https://the-x.shop",
+        "description": "Качественные товары из Китая для вашего дома по доступным ценам",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://the-x.shop/catalog?search={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "The X Shop",
+        "url": "https://the-x.shop",
+        "description": "Качественные товары из Китая по доступным ценам",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "RU"
+        }
+    }
+    </script>
+
+    <!-- Structured Data for BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Главная",
+                "item": "https://the-x.shop/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Каталог товаров",
+                "item": "https://the-x.shop/static-catalog.html"
+            }
+        ]
+    }
+    </script>
+</body>
+</html>

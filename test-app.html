@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест SQLite - The X Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .product h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .category {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+        .error {
+            color: #e74c3c;
+            background: #fdf2f2;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тест SQLite интеграции</h1>
+        
+        <div id="status" class="loading">Загрузка данных...</div>
+        
+        <div id="products"></div>
+        <div id="categories"></div>
+    </div>
+
+    <script type="module">
+        // Импортируем SQLite базу данных
+        import { sqliteDB } from './src/data/sqlite/database.ts';
+        
+        async function testSQLite() {
+            const statusEl = document.getElementById('status');
+            const productsEl = document.getElementById('products');
+            const categoriesEl = document.getElementById('categories');
+            
+            try {
+                // Инициализация базы данных
+                statusEl.textContent = 'Инициализация базы данных...';
+                await sqliteDB.init();
+                
+                // Получение продуктов
+                statusEl.textContent = 'Загрузка продуктов...';
+                const products = await sqliteDB.getProducts();
+                
+                // Получение категорий
+                statusEl.textContent = 'Загрузка категорий...';
+                const categories = await sqliteDB.getCategory();
+                
+                // Отображение результатов
+                statusEl.innerHTML = `✅ Данные загружены успешно!<br>
+                    📦 Продуктов: ${products.length}<br>
+                    📂 Категорий: ${categories.length}`;
+                
+                // Отображение продуктов
+                productsEl.innerHTML = '<h2>📦 Продукты</h2>';
+                products.forEach(product => {
+                    productsEl.innerHTML += `
+                        <div class="product">
+                            <h3>${product.title}</h3>
+                            <p>${product.description}</p>
+                            <div class="price">${product.price} ₽</div>
+                            <span class="category">${product.category}</span>
+                            <p><strong>Рейтинг:</strong> ${product.rating}/5</p>
+                            <p><strong>В наличии:</strong> ${product.stockQuantity} шт.</p>
+                        </div>
+                    `;
+                });
+                
+                // Отображение категорий
+                categoriesEl.innerHTML = '<h2>📂 Категории</h2>';
+                categories.forEach(category => {
+                    categoriesEl.innerHTML += `
+                        <div class="product">
+                            <h3>${category.name}</h3>
+                            <p>${category.description || 'Описание отсутствует'}</p>
+                        </div>
+                    `;
+                });
+                
+            } catch (error) {
+                console.error('Ошибка тестирования:', error);
+                statusEl.innerHTML = `<div class="error">
+                    ❌ Ошибка: ${error.message}<br>
+                    Проверьте консоль для подробностей
+                </div>`;
+            }
+        }
+        
+        // Запускаем тест
+        testSQLite();
+    </script>
+</body>
+</html> 
