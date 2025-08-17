@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Product, ColorVariant } from "@/types/product";
-import { formatPrice } from "@/lib/Imageutils";
+import { formatPrice } from "@/lib/Image-utils";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
 import ProductColorOptions from "./ProductColorOptions";
@@ -28,28 +28,31 @@ const ProductCard: React.FC<ProductCardProps> = ({
   compact = false,
   cartAvailable = true,
 }) => {
+ 
+
   const { addItem } = useCart();
   const { isInWishlist, toggleWishlistItem } = useWishlist();
 
   // Функция для получения правильного пути к изображению
   const getImageUrl = (imageName?: string): string => {
     if (!imageName) return "/images/placeholder.svg";
-    
+
     // Извлекаем UUID из строки (формат: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
     const uuidRegex = /([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i;
     const uuidMatch = imageName.match(uuidRegex);
     const uuid = uuidMatch ? uuidMatch[1] : null;
 
     if (uuid) {
-      // Ваши файлы начинаются с Q + UUID
-      return `/images/Q${uuid}.jpg`;
+      // Ваши файлы начинаются с UUID
+      return `/images/${uuid}.jpg`;
     }
-    
+
     // Если это полный путь
     if (imageName.startsWith('/images/')) {
+
       return imageName;
     }
-    
+
     // Дефолтный случай
     return "/images/placeholder.svg";
   };
@@ -62,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       avito: "/images/avito.png",
       wb: "/images/wb.png",
     };
-    
+
     const logo = logos[marketplace.toLowerCase()] || "/images/marketplace-default.png";
     return logo.endsWith('.png') ? logo : `${logo}.png`;
   };
@@ -113,11 +116,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
       itemScope
       itemType="https://schema.org/Product"
     >
+      
       {/* Изображение */}
       <Link to={`/product/${product.id}`} className="block" itemProp="url">
         <AspectRatio ratio={3 / 4} className="overflow-hidden rounded-t-lg bg-gray-50 relative">
           <img
-            src={getImageUrl(currentProduct.image_url)}
+            src={currentProduct.imageUrl}
             alt={product.title}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
             loading="lazy"
@@ -135,9 +139,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
       {/* Кнопка избранного */}
       <button
         onClick={handleToggleWishlist}
-        className={`absolute top-3 right-3 p-2 rounded-full bg-white shadow-sm hover:shadow-md transition-all duration-200 z-10 ${
-          isInWishlist(product.id) ? "text-red-500" : "text-gray-400"
-        }`}
+        className={`absolute top-3 right-3 p-2 rounded-full bg-white shadow-sm hover:shadow-md transition-all duration-200 z-10 ${isInWishlist(product.id) ? "text-red-500" : "text-gray-400"
+          }`}
         aria-label={isInWishlist(product.id) ? "Удалить из избранного" : "Добавить в избранное"}
       >
         <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? "fill-current" : ""}`} />
@@ -148,9 +151,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className="flex-grow">
           <Link to={`/product/${product.id}`}>
             <h3
-              className={`font-medium text-gray-900 group-hover:text-gray-700 line-clamp-2 mb-2 ${
-                compact ? "text-xs" : "text-sm"
-              }`}
+              className={`font-medium text-gray-900 group-hover:text-gray-700 line-clamp-2 mb-2 ${compact ? "text-xs" : "text-sm"
+                }`}
               itemProp="name"
             >
               {product.title}
@@ -212,9 +214,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Наличие */}
           {!compact && (
             <div
-              className={`text-xs font-medium mb-3 ${
-                stockStatus.inStock ? "text-green-600" : "text-red-500"
-              }`}
+              className={`text-xs font-medium mb-3 ${stockStatus.inStock ? "text-green-600" : "text-red-500"
+                }`}
             >
               {stockStatus.inStock
                 ? `В наличии · ${stockStatus.stockQuantity} шт`
@@ -231,9 +232,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 rel="noopener noreferrer"
                 title="Wildberries"
               >
-                <img 
-                  src={getMarketplaceLogo("wildberries")} 
-                  alt="Wildberries" 
+                <img
+                  src={getMarketplaceLogo("wildberries")}
+                  alt="Wildberries"
                   className="h-6"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "/images/marketplace-default.png";
@@ -248,9 +249,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 rel="noopener noreferrer"
                 title="Ozon"
               >
-                <img 
-                  src={getMarketplaceLogo("ozon")} 
-                  alt="Ozon" 
+                <img
+                  src={getMarketplaceLogo("ozon")}
+                  alt="Ozon"
                   className="h-6"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "/images/marketplace-default.png";
@@ -265,9 +266,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 rel="noopener noreferrer"
                 title="Avito"
               >
-                <img 
-                  src={getMarketplaceLogo("avito")} 
-                  alt="Avito" 
+                <img
+                  src={getMarketplaceLogo("avito")}
+                  alt="Avito"
                   className="h-6"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "/images/marketplace-default.png";

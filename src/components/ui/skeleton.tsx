@@ -1,4 +1,4 @@
-import { cn } from "@/lib/Imageutils"
+import { cn } from "@/lib/Image-utils"
 
 function Skeleton({
   className,
