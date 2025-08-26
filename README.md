@@ -9,7 +9,7 @@ npm install
 
 ### 2. Инициализация SQLite базы данных
 ```bash
-node scripts/init-sqlite.cjs
+npm run init-sqlite
 ```
 
 ### 3. Запуск проекта
@@ -55,7 +55,7 @@ src/
 
 1. **Проверьте импорты** - все пути должны быть корректными
 2. **Убедитесь, что все типы определены** в `src/types/`
-3. **Проверьте, что моковые данные созданы** через `node scripts/init-sqlite.cjs`
+3. **Проверьте, что моковые данные созданы** через `npm run init-sqlite`
 
 ### Проблема: База данных не загружается
 Если данные не загружаются:
@@ -63,7 +63,7 @@ src/
 1. **Проверьте, что файл `src/data/mock-data.json` существует**
 2. **Пересоздайте данные:**
    ```bash
-   node scripts/init-sqlite.cjs
+   npm run init-sqlite
    ```
 
 ## 🗄️ SQLite интеграция
@@ -137,7 +137,7 @@ console.log('Categories:', categories);
 ### Изменение структуры данных:
 1. Обновите интерфейсы в `src/types/product.ts`
 2. Обновите моковые данные
-3. Пересоздайте данные: `node scripts/init-sqlite.cjs`
+3. Пересоздайте данные: `npm run init-sqlite`
 
 ## ✅ Статус проекта
 
