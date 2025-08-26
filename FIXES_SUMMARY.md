@@ -78,7 +78,7 @@
 
 ### 1. Инициализация
 ```bash
-node scripts/init-sqlite.cjs
+npm run init-sqlite
 ```
 
 ### 2. Запуск проекта

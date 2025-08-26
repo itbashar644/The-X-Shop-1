@@ -8,7 +8,7 @@
 
 ### 1. База данных SQLite
 - **Файл**: `database.db` (создается автоматически)
-- **Скрипт инициализации**: `scripts/init-sqlite.js`
+- **Скрипт инициализации**: `scripts/init-sqlite.cjs`
 - **Класс базы данных**: `src/data/sqlite/database.ts`
 
 ### 2. API для работы с данными
